@@ -31,7 +31,7 @@ const ComB: React.FC<IProps> = (props) => {
   return (
     <div>
       {countElement(props.count)}
-      {textElement(props.text)}
+      {textElement(props?.text ?? '')}
     </div>
   )
 }
