@@ -15,4 +15,4 @@ const ComA: React.FC<IProps> = (props) => {
   )
 }
 
-export default React.memo(ComA, propsAreEqual<IProps>((preProps, nextProps) => preProps.count === nextProps.count))
+export default React.memo(ComA)

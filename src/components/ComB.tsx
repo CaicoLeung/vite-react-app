@@ -11,9 +11,9 @@ const ComB: React.FC<IProps> = (props) => {
 
   const countElement = useMemo(() => {
     console.log('ComB 的renderCount 执行了')
-    return (count: number) => (
+    return (
       <div>
-        子组件B的数字内容: {count}
+        子组件B的数字内容: {props.count}
       </div>
     )
   }, [props.count])
@@ -21,17 +21,17 @@ const ComB: React.FC<IProps> = (props) => {
   const textElement = useMemo(() => {
     console.log('ComB 的renderText 执行了')
 
-    return (text: string) => (
+    return (
       <div>
-        子组件B的文本内容: {text}
+        子组件B的文本内容: {props.text}
       </div>
     )
   }, [props.text])
 
   return (
     <div>
-      {countElement(props.count)}
-      {textElement(props?.text ?? '')}
+      {countElement}
+      {textElement}
     </div>
   )
 }
