@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 
 interface IProps {
   count: number;
-  text: string;
+  text?: string;
 }
 
 const ComB: React.FC<IProps> = (props) => {
