@@ -3,35 +3,45 @@ import logo from './logo.svg'
 import './App.css'
 import ComA from '#Comp/ComA'
 import ComB from '#Comp/ComB'
-import { Button, Input, Table } from 'antd'
+import { Button, Card, Input, message, Space, Table } from 'antd'
 import "antd/dist/antd.less";
 import { useRequest } from 'ahooks'
 import { JsonPlaceholder } from './services'
 import type { ColumnsType } from 'antd/lib/table'
+import { DownloadOutlined, ReloadOutlined } from '@ant-design/icons'
 
 function App() {
   const [count, setCount] = useState(0)
   const [count2, setCount2] = useState(0)
   const [text, setText] = useState<string>('')
-  const albumList = useRequest<JsonPlaceholder.Albums[]>(JsonPlaceholder.getAlbumList)
+  const albumList = useRequest<JsonPlaceholder.Post[]>(JsonPlaceholder.getPosts, {
+    cacheKey: 'postlist',
+    onSuccess: () => message.success('请求成功'),
+    onError: () => message.error('请求失败')
+  })
 
-  const columns: ColumnsType<JsonPlaceholder.Albums> = [
+  const columns: ColumnsType<JsonPlaceholder.Post> = [
     {
       title: 'id',
       dataIndex: 'id',
-      width: 250,
+      width: 200,
+      align: 'center'
+    },
+    {
+      title: 'userId',
+      dataIndex: 'userId',
+      width: 200,
       align: 'center'
     },
     {
       title: 'title',
       dataIndex: 'title',
-      width: 500,
+      width: 300,
     },
     {
-      title: 'userId',
-      dataIndex: 'userId',
-      width: 250,
-      align: 'center'
+      title: 'body',
+      dataIndex: 'body',
+      width: 500,
     },
   ]
 
@@ -54,14 +64,24 @@ function App() {
         </p>
         <ComA count={count} />
         <ComB count={count2} text={text} />
-        <Table<JsonPlaceholder.Albums>
-          rowKey="id"
-          loading={albumList.loading}
-          dataSource={albumList.data}
-          tableLayout="fixed"
-          columns={columns}
-          pagination={false}
-        />
+        <Card
+          title="测试useRequest"
+          bordered
+          extra={(
+            <Space>
+              <Button key="refresh" icon={<ReloadOutlined />} onClick={albumList.refresh}>刷新</Button>
+            </Space>
+          )}
+        >
+          <Table<JsonPlaceholder.Post>
+            rowKey="id"
+            loading={albumList.loading}
+            dataSource={albumList.data}
+            tableLayout="fixed"
+            columns={columns}
+            pagination={false}
+          />
+        </Card>
       </header>
     </div>
   )
