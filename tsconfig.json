@@ -17,12 +17,14 @@
     "noEmit": true,
     "jsx": "react",
     "paths": {
-      "@/*": ["src/*"],
-      "#COMP/*": ["src/components/*"],
-      "#LIBS/*": ["src/libs/*"],
+      "#Comp/*": ["src/components/*"],
+      "#CONF": ["src/config/index"],
+      "#Conf/*": ["src/config/*"],
       "#LIBS": ["src/libs/index"],
-      "#UTILS/*": ["src/utils/*"],
-      "#UTILS": ["src/utils/index"]
+      "#Libs/*": ["src/libs/*"],
+      "#UTILS": ["src/utils/index"],
+      "#Utils/*": ["src/utils/*"],
+      "@/*": ["src/*"],
     }
   },
   "include": ["./src"]
