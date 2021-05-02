@@ -11,17 +11,21 @@ const Home: React.FC = () => {
   const [count, setCount] = useState(0)
   const [count2, setCount2] = useState(0)
   const [text, setText] = useState<string>('')
+  const [errorState, setErrorState] = useState<any>({ message: 'Hello Vite + React!' })
+
+  const errorHandle = () => setErrorState(errorState.error)
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <div>
+        <p>{errorState.message}</p>
+        <Space>
           <Link to="/test">
             <Button type="primary" icon={<AlibabaOutlined />}>去ahooks页</Button>
           </Link>
-        </div>
+          <Button danger onClick={errorHandle}>测试页面报错崩溃</Button>
+        </Space>
         <Space>
           <Button type="primary" onClick={() => setCount(() => count + 1)}>
             count is: {count}
