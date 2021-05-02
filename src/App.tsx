@@ -1,15 +1,39 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import ComA from '#COMP/ComA'
-import ComB from '#COMP/ComB'
-import { Button, Input } from 'antd'
+import ComA from '#Comp/ComA'
+import ComB from '#Comp/ComB'
+import { Button, Input, Table } from 'antd'
 import "antd/dist/antd.less";
+import { useRequest } from 'ahooks'
+import { JsonPlaceholder } from './services'
+import type { ColumnsType } from 'antd/lib/table'
 
 function App() {
   const [count, setCount] = useState(0)
   const [count2, setCount2] = useState(0)
   const [text, setText] = useState<string>('')
+  const albumList = useRequest<JsonPlaceholder.Albums[]>(JsonPlaceholder.getAlbumList)
+
+  const columns: ColumnsType<JsonPlaceholder.Albums> = [
+    {
+      title: 'id',
+      dataIndex: 'id',
+      width: 250,
+      align: 'center'
+    },
+    {
+      title: 'title',
+      dataIndex: 'title',
+      width: 500,
+    },
+    {
+      title: 'userId',
+      dataIndex: 'userId',
+      width: 250,
+      align: 'center'
+    },
+  ]
 
   return (
     <div className="App">
@@ -30,6 +54,14 @@ function App() {
         </p>
         <ComA count={count} />
         <ComB count={count2} text={text} />
+        <Table<JsonPlaceholder.Albums>
+          rowKey="id"
+          loading={albumList.loading}
+          dataSource={albumList.data}
+          tableLayout="fixed"
+          columns={columns}
+          pagination={false}
+        />
       </header>
     </div>
   )
