@@ -31,7 +31,7 @@ export default class GlobalErrorBoundary extends React.Component<unknown, Global
           title="组件内部报错了!"
           subTitle={<PreWrap>{this.state.stack}</PreWrap>}
           extra={
-            <Button type="primary" key="console" onClick={location.reload}>
+            <Button type="primary" key="console" onClick={() => history.go(0)}>
               刷新
             </Button>
           }
