@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:uat": "tsc && vite build --mode uat",
     "serve": "vite preview"
   },
   "dependencies": {
