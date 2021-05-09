@@ -30,8 +30,8 @@
       "#Services/*": ["src/services/*"],
       "#UTILS": ["src/utils/index"],
       "#Utils/*": ["src/utils/*"],
-      "@/*": ["src/*"],
+      "@/*": ["src/*"]
     }
   },
-  "include": ["./src"]
+  "include": ["./src", "./*.d.ts"]
 }
