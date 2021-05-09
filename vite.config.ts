@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import vitePluginImp from "vite-plugin-imp";
 import path from "path";
 import fs from "fs";
 import lessToJS from "less-vars-to-js";
@@ -15,14 +14,6 @@ export default defineConfig({
   plugins: [
     reactRefresh(),
     tsconfigPaths(),
-    vitePluginImp({
-      libList: [
-        {
-          libName: "antd",
-          style: (name) => `antd/lib/${name}/style/index.less`,
-        },
-      ],
-    })
   ],
   css: {
     preprocessorOptions: {

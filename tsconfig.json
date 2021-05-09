@@ -21,6 +21,8 @@
       "#Comp/*": ["src/components/*"],
       "#CONF": ["src/config/index"],
       "#Conf/*": ["src/config/*"],
+      "#HOOKS": ["src/hooks/index"],
+      "#Hooks/*": ["src/hooks/*"],
       "#LIBS": ["src/libs/index"],
       "#Libs/*": ["src/libs/*"],
       "#Pages/*": ["src/pages/*"],
