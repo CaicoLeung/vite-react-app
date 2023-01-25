@@ -1,10 +1,11 @@
 import React from 'react';
 import GlobalErrorBoundary from '#Comp/Layout/GlobalErrorBoundary';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Spin } from 'antd';
 
 const HomePage = React.lazy(() => import(/* webpackChunkName:  "HomePage" */ '#Pages/Home'));
 const TestPage = React.lazy(() => import(/* webpackChunkName:  "TestPage" */ '#Pages/Test'));
+const TestDetailPage = React.lazy(() => import(/* webpackChunkName:  "TestDetailPage" */ '#Pages/Test/Detail'));
 const HooksPage = React.lazy(
   () => import(/* webpackChunkName:  "HooksPage" */ '#Pages/Test/Hooks'),
 );
@@ -15,12 +16,13 @@ const RootContainer: React.FC = () => {
     <BrowserRouter>
       <GlobalErrorBoundary>
         <React.Suspense fallback={<Spin size="large" />}>
-          <Switch>
-            <Route path="/hooks" component={HooksPage} />
-            <Route path="/test" component={TestPage} />
-            <Route path="/" component={HomePage} />
-            <Route component={NotFoundPage} />
-          </Switch>
+          <Routes>
+            <Route path="/hooks" element={<HooksPage/>} />
+            <Route path="/test" element={<TestPage/>} />
+            <Route path="/test/:id" element={<TestDetailPage/>} />
+            <Route path="/" element={<HomePage/>} />
+            <Route element={<NotFoundPage/>} />
+          </Routes>
         </React.Suspense>
       </GlobalErrorBoundary>
     </BrowserRouter>

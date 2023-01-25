@@ -1,7 +1,7 @@
 import If from '#Comp/ControlStament/If';
 import { PreWrap } from '#Comp/StyledComponents';
 import { Button, Typography, Result } from 'antd';
-import type { ErrorInfo } from 'react';
+import type { ErrorInfo, PropsWithChildren } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -19,7 +19,7 @@ const Card = styled.div`
   white-space: pre-wrap;
 `;
 export default class GlobalErrorBoundary extends React.Component<
-  unknown,
+  PropsWithChildren,
   GlobalErrorBoundaryState
 > {
   state: GlobalErrorBoundaryState = {
