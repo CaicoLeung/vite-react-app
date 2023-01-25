@@ -4,13 +4,13 @@ import { useRequest } from 'ahooks'
 import type { ColumnsType } from 'antd/lib/table'
 import { LeftCircleOutlined, ReloadOutlined } from '@ant-design/icons'
 import { JsonPlaceholder } from '#SERVICES'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const TestPage: React.FC = () => {
-  const history = useHistory()
-  const albumList = useRequest<JsonPlaceholder.Post[]>(JsonPlaceholder.getPosts, {
+  const navigate = useNavigate()
+  const albumList = useRequest<JsonPlaceholder.Post[], []>(JsonPlaceholder.getPosts, {
     cacheKey: 'postlist',
-    throttleInterval: 2000,
+    throttleWait: 2000,
     onSuccess: () => message.success('请求成功'),
     onError: () => message.error('请求失败')
   })
@@ -38,6 +38,14 @@ const TestPage: React.FC = () => {
       dataIndex: 'body',
       width: 500,
     },
+    {
+      title: 'action',
+      render: (value, record, index) => (
+        <Space>
+          <Button onClick={() => navigate(`/test/${record.id}`)}>view</Button>
+        </Space>
+      ),
+    }
   ]
 
   return (
@@ -47,7 +55,7 @@ const TestPage: React.FC = () => {
         bordered
         extra={(
           <Space>
-            <Button key="back" icon={<LeftCircleOutlined />} onClick={history.goBack}>返回</Button>
+            <Button key="back" icon={<LeftCircleOutlined />} onClick={() => navigate(-1)}>返回</Button>
             <Button key="refresh" type="primary" icon={<ReloadOutlined />} onClick={albumList.refresh}>刷新</Button>
           </Space>
         )}

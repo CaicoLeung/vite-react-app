@@ -14,3 +14,6 @@ export function getAlbumList() {
 export function getPosts() {
   return http.default.get<Post[]>('/posts')
 }
+export function getPostDetail(id: string | number) {
+  return http.default.get<Post>(`/posts/${id}`)
+}
